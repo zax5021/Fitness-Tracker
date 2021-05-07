@@ -4,10 +4,10 @@ const db = require("../../models");
 // get all
 router.get("/", async (req, res) => {
     try {
-        const lastOne = await db.Workout.findAll().sort({_id: 1});
+        const lastOne = await db.Workout.find().sort({_id: 1});
         res.status(200).json(lastOne);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(501).json(err);
     }
 });
 
@@ -37,7 +37,7 @@ router.put("/:id", async (req, res) => {
 // get last 7 workouts
 router.get("/range", async (req, res)=> {
 try {
-    const range = await db.Workout.findAll().sort({_id: -1}).limit(7);
+    const range = await db.Workout.find().sort({_id: -1}).limit(7);
     res.status(200).json(reverse);
 } catch (err) {
     res.status(500).json(error);
