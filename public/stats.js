@@ -42,10 +42,11 @@ function populateChart(data) {
     'Saturday',
   ];
 
-  const labels = data.map(({ day }) => {
-    const date = new Date(day);
-    return daysOfWeek[date.getDay()];
+  const labels = data.map(({ date }) => {
+    const day = new Date(date);
+    return daysOfWeek[day.getDay()];
   });
+  console.log(labels);
 
   let lineChart = new Chart(line, {
     type: 'line',
@@ -135,10 +136,10 @@ function populateChart(data) {
   let pieChart = new Chart(pie, {
     type: 'pie',
     data: {
-      labels: workouts,
+      labels ,
       datasets: [
         {
-          label: 'Exercises Performed',
+          label: 'Exercises Performed (Duration)',
           backgroundColor: colors,
           data: durations,
         },
@@ -147,7 +148,7 @@ function populateChart(data) {
     options: {
       title: {
         display: true,
-        text: 'Exercises Performed',
+        text: 'Exercises Performed (Duration)',
       },
     },
   });
@@ -155,7 +156,7 @@ function populateChart(data) {
   let donutChart = new Chart(pie2, {
     type: 'doughnut',
     data: {
-      labels: workouts,
+      labels ,
       datasets: [
         {
           label: 'Exercises Performed',
@@ -167,7 +168,7 @@ function populateChart(data) {
     options: {
       title: {
         display: true,
-        text: 'Exercises Performed',
+        text: 'Exercises Performed (Pounds)',
       },
     },
   });
@@ -184,15 +185,16 @@ function calculateTotalDuration(data) {
         return total + duration;
     }, 0);
 
+    console.log(workoutTotal);
     totals.push(workoutTotal);
   });
-
-  return totals;
+console.log(totals);
+return totals;
 }
 
 function calculateTotalWeight(data) {
   let totals = [];
-
+  
   data.forEach((workout) => {
     const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
       if (type === 'resistance') {
@@ -201,9 +203,10 @@ function calculateTotalWeight(data) {
         return total;
       }
     }, 0);
-
+    console.log(workoutTotal);
     totals.push(workoutTotal);
   });
+  console.log(totals);
 
   return totals;
 }
@@ -215,6 +218,7 @@ function workoutNames(data) {
     workout.exercises.forEach((exercise) => {
       workouts.push(exercise.name);
     });
+    console.log (workouts)
   });
 
   // return de-duplicated array with JavaScript `Set` object

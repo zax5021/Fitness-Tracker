@@ -37,10 +37,10 @@ router.put("/:id", async (req, res) => {
 // get last 7 workouts
 router.get("/range", async (req, res)=> {
 try {
-    const range = await db.Workout.find().sort({_id: -1}).limit(7);
-    res.status(200).json(reverse);
+    const range = await db.Workout.find({}).sort({_id: -1}).limit(7);
+    res.status(200).json(range);
 } catch (err) {
-    res.status(500).json(error);
+    res.status(500).json(err);
 }
 
 });
