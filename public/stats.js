@@ -42,7 +42,9 @@ function populateChart(data) {
     'Saturday',
   ];
 
-  const labels = data.map(({ date }) => {
+  const labels = data.map(({
+    date
+  }) => {
     const day = new Date(date);
     return daysOfWeek[day.getDay()];
   });
@@ -52,15 +54,13 @@ function populateChart(data) {
     type: 'line',
     data: {
       labels,
-      datasets: [
-        {
-          label: 'Workout Duration In Minutes',
-          backgroundColor: 'red',
-          borderColor: 'red',
-          data: durations,
-          fill: false,
-        },
-      ],
+      datasets: [{
+        label: 'Workout Duration In Minutes',
+        backgroundColor: 'red',
+        borderColor: 'red',
+        data: durations,
+        fill: false,
+      }, ],
     },
     options: {
       responsive: true,
@@ -68,22 +68,21 @@ function populateChart(data) {
         display: true,
       },
       scales: {
-        xAxes: [
-          {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
             display: true,
-            scaleLabel: {
-              display: true,
-            },
           },
-        ],
-        yAxes: [
-          {
+        }, ],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          },
+          display: true,
+          scaleLabel: {
             display: true,
-            scaleLabel: {
-              display: true,
-            },
           },
-        ],
+        }, ],
       },
     },
   });
@@ -92,29 +91,27 @@ function populateChart(data) {
     type: 'bar',
     data: {
       labels,
-      datasets: [
-        {
-          label: 'Pounds',
-          data: pounds,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1,
-        },
-      ],
+      datasets: [{
+        label: 'Pounds',
+        data: pounds,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      }, ],
     },
     options: {
       title: {
@@ -122,13 +119,11 @@ function populateChart(data) {
         text: 'Pounds Lifted',
       },
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
           },
-        ],
+        }, ],
       },
     },
   });
@@ -136,14 +131,12 @@ function populateChart(data) {
   let pieChart = new Chart(pie, {
     type: 'pie',
     data: {
-      labels ,
-      datasets: [
-        {
-          label: 'Exercises Performed (Duration)',
-          backgroundColor: colors,
-          data: durations,
-        },
-      ],
+      labels,
+      datasets: [{
+        label: 'Exercises Performed (Duration)',
+        backgroundColor: colors,
+        data: durations,
+      }, ],
     },
     options: {
       title: {
@@ -156,14 +149,12 @@ function populateChart(data) {
   let donutChart = new Chart(pie2, {
     type: 'doughnut',
     data: {
-      labels ,
-      datasets: [
-        {
-          label: 'Exercises Performed',
-          backgroundColor: colors,
-          data: pounds,
-        },
-      ],
+      labels,
+      datasets: [{
+        label: 'Exercises Performed',
+        backgroundColor: colors,
+        data: pounds,
+      }, ],
     },
     options: {
       title: {
@@ -181,22 +172,28 @@ function calculateTotalDuration(data) {
   console.log(data)
 
   data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, { type, duration }) => {
-        return total + duration;
+    const workoutTotal = workout.exercises.reduce((total, {
+      type,
+      duration
+    }) => {
+      return total + duration;
     }, 0);
 
     console.log(workoutTotal);
     totals.push(workoutTotal);
   });
-console.log(totals);
-return totals;
+  console.log(totals);
+  return totals;
 }
 
 function calculateTotalWeight(data) {
   let totals = [];
-  
+
   data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
+    const workoutTotal = workout.exercises.reduce((total, {
+      type,
+      weight
+    }) => {
       if (type === 'resistance') {
         return total + weight;
       } else {
@@ -218,7 +215,7 @@ function workoutNames(data) {
     workout.exercises.forEach((exercise) => {
       workouts.push(exercise.name);
     });
-    console.log (workouts)
+    console.log(workouts)
   });
 
   // return de-duplicated array with JavaScript `Set` object
