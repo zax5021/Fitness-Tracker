@@ -9,7 +9,7 @@ const WorkoutSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    routine: [
+    exercises: [
 
         {
             type: {
@@ -50,4 +50,4 @@ const WorkoutSchema = new Schema({
 
 const Workout = mongoose.model('Workout', WorkoutSchema);
 
-module.exports = Transaction;
+module.exports = Workout;
