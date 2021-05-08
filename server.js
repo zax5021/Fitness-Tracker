@@ -21,8 +21,8 @@ app.use(router);
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
     useNewUrlParser: true,
     useFindAndModify: false,
-    //this gets rid of the error when starting server
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
 
 app.listen(PORT, function () {
