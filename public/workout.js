@@ -21,6 +21,8 @@ async function initWorkout() {
 
 function tallyExercises(exercises) {
   const tallied = exercises.reduce((acc, curr) => {
+    //treating totalDuration like totalWeight because it worked earlier, but this time duration applies to both resist and cardio so placing it before conditionals. Fingers crossed again
+    acc.totalDuration = (acc.totalDuration || 0) + curr.duration;
     if (curr.type === "resistance") {
       acc.totalWeight = (acc.totalWeight || 0) + curr.weight;
       acc.totalSets = (acc.totalSets || 0) + curr.sets;
