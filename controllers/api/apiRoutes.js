@@ -4,7 +4,7 @@ const db = require("../../models");
 // get all
 router.get("/", async (req, res) => {
     try {
-        const lastOne = await db.Workout.find().sort({_id: 1});
+        const lastOne = await db.Workout.find({}).sort({_id: 1});
         res.status(200).json(lastOne);
     } catch (err) {
         res.status(501).json(err);
